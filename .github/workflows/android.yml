@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -28,12 +28,15 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Accept Android licenses
+        run: |
+          yes | sdkmanager --licenses
+
       - name: Install Android SDK
         run: |
-          yes | sdkmanager --licenses || true
           sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
-      - name: Copy app design
+      - name: Copy HTML
         run: |
           mkdir -p app/src/main/assets
           cp index.html app/src/main/assets/index.html
@@ -46,4 +49,3 @@ jobs:
         with:
           name: SABBIR-AI-PHONE-DOCTOR-APK
           path: app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
