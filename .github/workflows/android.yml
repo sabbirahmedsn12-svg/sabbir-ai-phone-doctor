@@ -10,8 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -25,16 +29,13 @@ jobs:
         with:
           gradle-version: '9.6.0'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Accept Android licenses
         run: |
-          yes | sdkmanager --licenses
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
 
       - name: Install Android SDK
         run: |
-          sdkmanager "platforms;android-36" "build-tools;36.0.0"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-36" "build-tools;36.0.0"
 
       - name: Copy HTML
         run: |
@@ -49,3 +50,4 @@ jobs:
         with:
           name: SABBIR-AI-PHONE-DOCTOR-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
