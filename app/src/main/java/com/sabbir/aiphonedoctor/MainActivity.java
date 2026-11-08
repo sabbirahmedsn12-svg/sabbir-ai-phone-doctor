@@ -2,6 +2,7 @@ package com.sabbir.aiphonedoctor;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Build;
 import android.os.BatteryManager;
 import android.os.Environment;
 import android.os.StatFs;
@@ -57,6 +58,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String getReport() {
+
             JSONObject report = new JSONObject();
 
             try {
@@ -66,6 +68,7 @@ public class MainActivity extends Activity {
                 );
 
                 if (batteryIntent != null) {
+
                     int level = batteryIntent.getIntExtra(
                         BatteryManager.EXTRA_LEVEL, -1
                     );
@@ -96,20 +99,23 @@ public class MainActivity extends Activity {
                     Environment.getDataDirectory().getPath()
                 );
 
-                long total = stat.getBlockCountLong()
-                    * stat.getBlockSizeLong();
+                long total =
+                    stat.getBlockCountLong() *
+                    stat.getBlockSizeLong();
 
-                long free = stat.getAvailableBlocksLong()
-                    * stat.getBlockSizeLong();
+                long free =
+                    stat.getAvailableBlocksLong() *
+                    stat.getBlockSizeLong();
 
                 report.put("storageTotal", total);
                 report.put("storageFree", free);
                 report.put("success", true);
 
             } catch (Exception e) {
+
                 try {
                     report.put("success", false);
-                    report.put("error", "পরীক্ষা সম্পন্ন করা যায়নি");
+                    report.put("error", "তথ্য পাওয়া যায়নি");
                 } catch (Exception ignored) {
                 }
             }
@@ -119,11 +125,15 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void openSettings(final String type) {
+
             runOnUiThread(() -> {
+
+                Intent intent;
+
                 try {
-                    Intent intent;
 
                     switch (type) {
+
                         case "battery":
                             intent = new Intent(
                                 Settings.ACTION_BATTERY_SAVER_SETTINGS
@@ -136,10 +146,37 @@ public class MainActivity extends Activity {
                             );
                             break;
 
+                        case "notifications":
+
+                            if (Build.VERSION.SDK_INT >= 26) {
+                                intent = new Intent(
+                                    Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                                );
+
+                                intent.putExtra(
+                                    Settings.EXTRA_APP_PACKAGE,
+                                    getPackageName()
+                                );
+
+                            } else {
+                                intent = new Intent(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.parse("package:" + getPackageName())
+                                );
+                            }
+                            break;
+
+                        case "permissions":
                         case "app":
                             intent = new Intent(
                                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                                 Uri.parse("package:" + getPackageName())
+                            );
+                            break;
+
+                        case "storage":
+                            intent = new Intent(
+                                "android.settings.INTERNAL_STORAGE_SETTINGS"
                             );
                             break;
 
@@ -151,6 +188,7 @@ public class MainActivity extends Activity {
                     startActivity(intent);
 
                 } catch (Exception e) {
+
                     startActivity(
                         new Intent(Settings.ACTION_SETTINGS)
                     );
@@ -161,6 +199,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+
         if (webView != null && webView.canGoBack()) {
             webView.goBack();
         } else {
