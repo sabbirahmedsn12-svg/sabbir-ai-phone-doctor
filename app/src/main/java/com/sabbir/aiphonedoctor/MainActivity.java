@@ -10,14 +10,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Context;
 import android.net.Uri;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.provider.Settings;
+import android.app.NotificationManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings;
 import android.webkit.JavascriptInterface;
 import android.graphics.Color;
+import android.content.pm.PackageManager;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class MainActivity extends Activity {
 
@@ -62,7 +68,9 @@ public class MainActivity extends Activity {
             JSONObject report = new JSONObject();
 
             try {
-                Intent batteryIntent = registerReceiver(
+
+                // Battery information
+                Intent batteryIntent = context.registerReceiver(
                     null,
                     new IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                 );
@@ -81,6 +89,14 @@ public class MainActivity extends Activity {
                         BatteryManager.EXTRA_STATUS, -1
                     );
 
+                    int health = batteryIntent.getIntExtra(
+                        BatteryManager.EXTRA_HEALTH, -1
+                    );
+
+                    int temperature = batteryIntent.getIntExtra(
+                        BatteryManager.EXTRA_TEMPERATURE, -1
+                    );
+
                     int percent = -1;
 
                     if (level >= 0 && scale > 0) {
@@ -93,8 +109,12 @@ public class MainActivity extends Activity {
 
                     report.put("battery", percent);
                     report.put("charging", charging);
+                    report.put("batteryHealth", health);
+                    report.put("batteryTemperature",
+                        temperature >= 0 ? temperature / 10.0 : -1);
                 }
 
+                // Storage information
                 StatFs stat = new StatFs(
                     Environment.getDataDirectory().getPath()
                 );
@@ -109,6 +129,77 @@ public class MainActivity extends Activity {
 
                 report.put("storageTotal", total);
                 report.put("storageFree", free);
+                report.put("storageUsed", total - free);
+
+                // Network information
+                boolean connected = false;
+                boolean internet = false;
+                boolean wifi = false;
+
+                ConnectivityManager cm =
+                    (ConnectivityManager) context.getSystemService(
+                        Context.CONNECTIVITY_SERVICE
+                    );
+
+                if (cm != null) {
+
+                    Network network = cm.getActiveNetwork();
+
+                    if (network != null) {
+
+                        NetworkCapabilities caps =
+                            cm.getNetworkCapabilities(network);
+
+                        if (caps != null) {
+
+                            connected = caps.hasCapability(
+                                NetworkCapabilities.NET_CAPABILITY_INTERNET
+                            );
+
+                            internet = caps.hasCapability(
+                                NetworkCapabilities.NET_CAPABILITY_VALIDATED
+                            );
+
+                            wifi = caps.hasTransport(
+                                NetworkCapabilities.TRANSPORT_WIFI
+                            );
+                        }
+                    }
+                }
+
+                report.put("networkConnected", connected);
+                report.put("internetAvailable", internet);
+                report.put("wifiConnected", wifi);
+
+                // This app's notification permission
+                boolean notificationsEnabled = true;
+
+                if (Build.VERSION.SDK_INT >= 24) {
+                    NotificationManager nm =
+                        (NotificationManager) context.getSystemService(
+                            Context.NOTIFICATION_SERVICE
+                        );
+
+                    if (nm != null) {
+                        notificationsEnabled =
+                            nm.areNotificationsEnabled();
+                    }
+                }
+
+                report.put("notificationsEnabled",
+                    notificationsEnabled);
+
+                // Check selected installed apps
+                JSONArray apps = new JSONArray();
+
+                addApp(apps, "WhatsApp", "com.whatsapp");
+                addApp(apps, "IMO", "com.imo.android.imoim");
+                addApp(apps, "Facebook", "com.facebook.katana");
+                addApp(apps, "Messenger", "com.facebook.orca");
+                addApp(apps, "Chrome", "com.android.chrome");
+                addApp(apps, "YouTube", "com.google.android.youtube");
+
+                report.put("apps", apps);
                 report.put("success", true);
 
             } catch (Exception e) {
@@ -121,6 +212,34 @@ public class MainActivity extends Activity {
             }
 
             return report.toString();
+        }
+
+        private void addApp(JSONArray apps, String name, String packageName) {
+
+            JSONObject item = new JSONObject();
+
+            try {
+
+                boolean installed = false;
+
+                try {
+                    context.getPackageManager().getPackageInfo(
+                        packageName, 0
+                    );
+                    installed = true;
+
+                } catch (PackageManager.NameNotFoundException ignored) {
+                    installed = false;
+                }
+
+                item.put("name", name);
+                item.put("package", packageName);
+                item.put("installed", installed);
+
+                apps.put(item);
+
+            } catch (Exception ignored) {
+            }
         }
 
         @JavascriptInterface
@@ -203,22 +322,17 @@ public class MainActivity extends Activity {
 
                 String safePackage = null;
 
-                if ("com.whatsapp".equals(packageName)) {
-                    safePackage = "com.whatsapp";
+                if ("com.whatsapp".equals(packageName) ||
+                    "com.imo.android.imoim".equals(packageName) ||
+                    "com.facebook.katana".equals(packageName) ||
+                    "com.facebook.orca".equals(packageName) ||
+                    "com.android.chrome".equals(packageName) ||
+                    "com.google.android.youtube".equals(packageName)) {
 
-                } else if ("com.imo.android.imoim".equals(packageName)) {
-                    safePackage = "com.imo.android.imoim";
-
-                } else if ("com.facebook.katana".equals(packageName)) {
-                    safePackage = "com.facebook.katana";
-
-                } else if ("com.google.android.youtube".equals(packageName)) {
-                    safePackage = "com.google.android.youtube";
+                    safePackage = packageName;
                 }
 
-                if (safePackage == null) {
-                    return;
-                }
+                if (safePackage == null) return;
 
                 try {
 
@@ -248,13 +362,12 @@ public class MainActivity extends Activity {
                 } catch (Exception e) {
 
                     try {
-                        Intent fallback = new Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:" + safePackage)
+                        startActivity(
+                            new Intent(
+                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.parse("package:" + safePackage)
+                            )
                         );
-
-                        startActivity(fallback);
-
                     } catch (Exception ignored) {
                         startActivity(
                             new Intent(Settings.ACTION_SETTINGS)
