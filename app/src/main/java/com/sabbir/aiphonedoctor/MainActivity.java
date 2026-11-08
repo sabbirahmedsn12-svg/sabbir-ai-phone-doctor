@@ -57,7 +57,6 @@ public class MainActivity extends Activity {
         );
 
         setContentView(webView);
-
         webView.loadUrl("file:///android_asset/index.html");
     }
 
@@ -89,14 +88,12 @@ public class MainActivity extends Activity {
             JSONObject report = new JSONObject();
 
             try {
-
                 Intent batteryIntent = context.registerReceiver(
                         null,
                         new IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                 );
 
                 if (batteryIntent != null) {
-
                     int level = batteryIntent.getIntExtra(
                             BatteryManager.EXTRA_LEVEL, -1
                     );
@@ -160,16 +157,13 @@ public class MainActivity extends Activity {
                         );
 
                 if (cm != null) {
-
                     Network network = cm.getActiveNetwork();
 
                     if (network != null) {
-
                         NetworkCapabilities caps =
                                 cm.getNetworkCapabilities(network);
 
                         if (caps != null) {
-
                             connected = caps.hasCapability(
                                     NetworkCapabilities.NET_CAPABILITY_INTERNET
                             );
@@ -214,7 +208,6 @@ public class MainActivity extends Activity {
                 report.put("success", true);
 
             } catch (Exception e) {
-
                 try {
                     report.put("success", false);
                     report.put("error", "তথ্য পাওয়া যায়নি");
@@ -226,11 +219,9 @@ public class MainActivity extends Activity {
         }
 
         private void addApp(JSONArray apps, String name, String packageName) {
-
             JSONObject item = new JSONObject();
 
             try {
-
                 boolean installed = false;
 
                 try {
@@ -238,7 +229,6 @@ public class MainActivity extends Activity {
                             packageName, 0
                     );
                     installed = true;
-
                 } catch (PackageManager.NameNotFoundException ignored) {
                     installed = false;
                 }
@@ -248,16 +238,13 @@ public class MainActivity extends Activity {
                 item.put("installed", installed);
 
                 apps.put(item);
-
             } catch (Exception ignored) {
             }
         }
 
         @JavascriptInterface
         public boolean hasUsageAccess() {
-
             try {
-
                 AppOpsManager appOps =
                         (AppOpsManager) context.getSystemService(
                                 Context.APP_OPS_SERVICE
@@ -280,15 +267,12 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void openUsageAccessSettings() {
-
             runOnUiThread(() -> {
-
                 try {
                     Intent intent = new Intent(
                             Settings.ACTION_USAGE_ACCESS_SETTINGS
                     );
                     startActivity(intent);
-
                 } catch (Exception e) {
                     startActivity(new Intent(Settings.ACTION_SETTINGS));
                 }
@@ -297,9 +281,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void requestNotificationPermission() {
-
             runOnUiThread(() -> {
-
                 if (Build.VERSION.SDK_INT >= 33 &&
                         checkSelfPermission(
                                 "android.permission.POST_NOTIFICATIONS"
@@ -317,7 +299,6 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public boolean notificationsAllowed() {
-
             NotificationManager nm =
                     (NotificationManager) getSystemService(
                             Context.NOTIFICATION_SERVICE
@@ -328,13 +309,10 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public boolean startMonitoring() {
-
             if (!hasUsageAccess()) return false;
-
             if (!notificationsAllowed()) return false;
 
             try {
-
                 Intent serviceIntent = new Intent(
                         MainActivity.this,
                         AppMonitorService.class
@@ -363,9 +341,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void stopMonitoring() {
-
             try {
-
                 Intent serviceIntent = new Intent(
                         MainActivity.this,
                         AppMonitorService.class
@@ -387,7 +363,6 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public boolean isMonitoring() {
-
             return getSharedPreferences(
                     "doctor_alerts", MODE_PRIVATE
             ).getBoolean("monitoring", false);
@@ -395,13 +370,9 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String getPendingDiagnostic() {
-
-            if (pendingDiagnostic == null) {
-                return "";
-            }
+            if (pendingDiagnostic == null) return "";
 
             try {
-
                 String title = pendingDiagnostic.getStringExtra(
                         "diagnostic_title"
                 );
@@ -425,7 +396,6 @@ public class MainActivity extends Activity {
                 );
 
                 pendingDiagnostic = null;
-
                 return data.toString();
 
             } catch (Exception e) {
@@ -436,15 +406,11 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void openSettings(final String type) {
-
             runOnUiThread(() -> {
-
                 Intent intent;
 
                 try {
-
                     switch (type) {
-
                         case "battery":
                             intent = new Intent(
                                     Settings.ACTION_BATTERY_SAVER_SETTINGS
@@ -458,17 +424,14 @@ public class MainActivity extends Activity {
                             break;
 
                         case "notifications":
-
                             if (Build.VERSION.SDK_INT >= 26) {
                                 intent = new Intent(
                                         Settings.ACTION_APP_NOTIFICATION_SETTINGS
                                 );
-
                                 intent.putExtra(
                                         Settings.EXTRA_APP_PACKAGE,
                                         getPackageName()
                                 );
-
                             } else {
                                 intent = new Intent(
                                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -491,7 +454,6 @@ public class MainActivity extends Activity {
                     startActivity(intent);
 
                 } catch (Exception e) {
-
                     startActivity(new Intent(Settings.ACTION_SETTINGS));
                 }
             });
@@ -499,9 +461,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void openAppSettings(final String packageName) {
-
             runOnUiThread(() -> {
-
                 String safePackage = null;
 
                 if ("com.whatsapp".equals(packageName) ||
@@ -517,11 +477,9 @@ public class MainActivity extends Activity {
                 if (safePackage == null) return;
 
                 try {
-
                     Intent intent;
 
                     if (Build.VERSION.SDK_INT >= 26) {
-
                         intent = new Intent(
                                 Settings.ACTION_APP_NOTIFICATION_SETTINGS
                         );
@@ -530,9 +488,7 @@ public class MainActivity extends Activity {
                                 Settings.EXTRA_APP_PACKAGE,
                                 safePackage
                         );
-
                     } else {
-
                         intent = new Intent(
                                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                                 Uri.parse("package:" + safePackage)
@@ -542,7 +498,6 @@ public class MainActivity extends Activity {
                     startActivity(intent);
 
                 } catch (Exception e) {
-
                     try {
                         startActivity(
                                 new Intent(
@@ -560,7 +515,6 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-
         if (webView != null && webView.canGoBack()) {
             webView.goBack();
         } else {
