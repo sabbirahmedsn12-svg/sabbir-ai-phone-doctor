@@ -3,367 +3,344 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#087c4b">
 <title>SABBIR AI PHONE DOCTOR</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f3f8f4;color:#19372a;padding-bottom:85px}
-header{background:#087c4b;color:white;padding:22px 18px 28px;border-radius:0 0 25px 25px}
-.top{display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{width:45px;height:45px;border-radius:14px;background:white;color:#087c4b;display:grid;place-items:center;font-size:27px;font-weight:bold}
-.brand h1{font-size:17px}
-.brand p{font-size:10px;margin-top:5px;color:#d6f3e2}
-.top button{background:#ffffff20;color:white;border:1px solid #ffffff55;padding:11px;border-radius:12px;font-size:18px}
-.welcome{margin-top:25px}
-.welcome h2{font-size:21px}
-.welcome p{font-size:12px;color:#d8f2e3;margin-top:8px}
-.container{max-width:650px;margin:auto;padding:16px}
-.card{background:white;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 4px 18px #00000009}
-.scan{text-align:center;padding:24px 18px}
-.scan-icon{width:85px;height:85px;background:#e9f7ee;border-radius:50%;margin:auto auto 15px;display:grid;place-items:center;font-size:39px}
-.scan h2{font-size:20px}
-.scan p{font-size:12px;color:#829087;line-height:1.7;margin-top:9px}
-.primary{width:100%;background:#087c4b;color:white;border:0;border-radius:12px;padding:15px;font-size:15px;font-weight:bold;margin-top:18px}
-.section{font-size:16px;margin:23px 2px 12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.feature{background:white;border:1px solid #e7eee8;border-radius:16px;padding:15px;text-align:left;min-height:112px;box-shadow:0 3px 12px #00000008}
-.feature span{font-size:25px}
-.feature h3{font-size:13px;margin-top:9px}
-.feature p{font-size:10px;color:#829087;margin-top:5px;line-height:1.5}
-.health{display:flex;justify-content:space-between;align-items:center}
-.health h3{font-size:14px}
-.health span{font-size:11px;color:#829087}
-.score{font-size:30px;color:#087c4b;font-weight:bold;margin-top:12px}
-.score small{font-size:13px}
-.progress{height:8px;background:#edf2ee;border-radius:20px;margin-top:10px;overflow:hidden}
-.progress div{height:100%;width:0;background:#087c4b}
-.health p{font-size:10px;color:#829087;margin-top:9px}
-.problem{background:white;border-radius:15px;padding:17px;color:#52675b;font-size:12px;line-height:1.9;white-space:pre-line}
-.page{display:none}
-.page.active{display:block}
-.heading{font-size:21px;margin:8px 0}
-.description{font-size:12px;color:#829087;line-height:1.7;margin-bottom:17px}
-.setting{background:white;border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;border:1px solid #e7eee8}
-.setting-icon{width:40px;height:40px;border-radius:12px;background:#e9f7ee;display:grid;place-items:center;font-size:21px}
-.setting-info{flex:1}
-.setting-info h3{font-size:13px}
-.setting-info p{font-size:11px;color:#829087;margin-top:5px;white-space:pre-line}
-.arrow{color:#829087;font-size:22px}
-.secondary{width:100%;padding:13px;border:1px solid #087c4b;background:white;color:#087c4b;border-radius:12px;font-weight:bold;margin-top:8px}
-.bottom{position:fixed;bottom:0;left:0;width:100%;background:white;border-top:1px solid #e7eee8;display:flex;justify-content:space-around;padding:10px 3px calc(10px + env(safe-area-inset-bottom));z-index:10}
-.nav{border:0;background:none;color:#829087;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:5px}
-.nav b{font-size:20px;font-weight:normal}
-.nav.active{color:#087c4b;font-weight:bold}
-.footer{text-align:center;color:#829087;font-size:10px;line-height:1.8;padding:25px}
-.overlay{display:none;position:fixed;inset:0;background:#092b1ddd;z-index:20;align-items:center;justify-content:center;padding:20px}
-.overlay.show{display:flex}
-.modal{background:white;width:100%;max-width:350px;border-radius:20px;padding:25px;text-align:center}
-.loader{width:55px;height:55px;border:6px solid #e5f3e9;border-top-color:#087c4b;border-radius:50%;margin:10px auto 20px;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.modal h3{font-size:18px}
-.modal p{font-size:12px;color:#829087;line-height:1.7;margin-top:10px}
-.close{display:none;background:#087c4b;color:white;border:0;padding:12px;border-radius:10px;width:100%;margin-top:18px}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f7f3;
+ color:#183b2b;
+ padding-bottom:85px
+}
+header{
+ background:#087847;
+ color:white;
+ padding:22px 17px;
+ border-radius:0 0 22px 22px
+}
+header h2{margin:0;font-size:21px}
+header p{margin:7px 0 0;font-size:13px;color:#e0f5e9}
+.container{padding:15px}
+.welcome{
+ background:linear-gradient(135deg,#087847,#16a36b);
+ color:white;
+ padding:20px;
+ border-radius:17px;
+ margin-bottom:15px
+}
+.welcome h3{margin:0 0 8px}
+.welcome p{font-size:13px;line-height:1.6;margin:0}
+.card{
+ background:white;
+ border-radius:15px;
+ padding:17px;
+ margin-bottom:14px;
+ box-shadow:0 3px 12px #0000000b
+}
+.card h3{margin:0 0 12px;font-size:17px}
+button{
+ border:0;
+ border-radius:10px;
+ padding:12px 15px;
+ background:#087847;
+ color:white;
+ font-size:14px;
+ font-weight:bold;
+ cursor:pointer
+}
+.scanbtn{width:100%;padding:15px;font-size:16px}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:11px
+}
+.tile{
+ background:white;
+ padding:17px 10px;
+ border-radius:14px;
+ text-align:center;
+ box-shadow:0 3px 10px #00000008;
+ cursor:pointer
+}
+.tile .emoji{font-size:27px}
+.tile p{margin:8px 0 0;font-weight:bold;font-size:14px}
+.info{
+ display:flex;
+ justify-content:space-between;
+ padding:9px 0;
+ border-bottom:1px solid #edf1ee;
+ font-size:14px
+}
+.app{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ padding:13px 0;
+ border-bottom:1px solid #edf1ee
+}
+.appname{font-weight:bold;font-size:14px}
+.app small{display:block;color:#77877d;margin-top:4px}
+.app button{padding:10px;font-size:12px;white-space:nowrap}
+.section{display:none}
+.section.active{display:block}
+.nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:white;
+ display:flex;
+ justify-content:space-around;
+ padding:12px 3px;
+ box-shadow:0 -3px 12px #00000012
+}
+.nav button{
+ background:transparent;
+ color:#456353;
+ padding:8px 5px;
+ font-size:12px
+}
+.nav button.selected{color:#087847}
+.muted{font-size:13px;color:#728176;line-height:1.6}
+#overlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:10;
+ align-items:center;
+ justify-content:center;
+ padding:20px
+}
+#overlay.show{display:flex}
+.modal{
+ background:white;
+ border-radius:16px;
+ padding:22px;
+ width:100%;
+ max-width:350px;
+ text-align:center
+}
+.modal h3{margin-top:0}
+.modal button{margin-top:12px}
+footer{text-align:center;color:#809087;font-size:12px;padding:15px}
 </style>
 </head>
 
 <body>
 
 <header>
- <div class="top">
-  <div class="brand">
-   <div class="logo">✚</div>
-   <div>
-    <h1>SABBIR AI</h1>
-    <p>PHONE DOCTOR</p>
-   </div>
-  </div>
-  <button onclick="page('settings')">⚙</button>
- </div>
- <div class="welcome">
-  <h2>আপনার ফোনের যত্নে স্বাগতম!</h2>
-  <p>ফোনের সমস্যা শনাক্ত ও সমাধানে আপনার সহকারী।</p>
- </div>
+<h2>🛡️ SABBIR AI PHONE DOCTOR</h2>
+<p>আপনার ফোনের যত্নে স্মার্ট সহকারী</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-<section class="page active" id="home">
+<section id="home" class="section active">
 
- <div class="card scan">
-  <div class="scan-icon">🩺</div>
-  <h2>ফোন স্বাস্থ্য পরীক্ষা</h2>
-  <p>ব্যাটারি ও স্টোরেজের প্রকৃত তথ্য পরীক্ষা করুন।</p>
-  <button class="primary" onclick="scan()">🔍 ফোন স্ক্যান করুন</button>
- </div>
-
- <h3 class="section">📊 ফোনের অবস্থা</h3>
-
- <div class="card">
-  <div class="health">
-   <h3>খালি স্টোরেজের পরিমাণ</h3>
-   <span id="status">পরীক্ষা হয়নি</span>
-  </div>
-  <div class="score" id="score">--<small>%</small></div>
-  <div class="progress"><div id="bar"></div></div>
-  <p>এটি খালি স্টোরেজের শতকরা হার, ফোনের সামগ্রিক স্বাস্থ্য স্কোর নয়।</p>
- </div>
-
- <h3 class="section">🛠️ পরীক্ষার বিভাগ</h3>
-
- <div class="grid">
-  <button class="feature" onclick="page('apps')"><span>📱</span><h3>অ্যাপ পরীক্ষা</h3><p>ইনস্টল করা অ্যাপের সেটিংস</p></button>
-  <button class="feature" onclick="page('notifications')"><span>🔔</span><h3>নোটিফিকেশন</h3><p>নোটিফিকেশন সেটিংস</p></button>
-  <button class="feature" onclick="page('permissions')"><span>🔐</span><h3>অ্যাপ অনুমতি</h3><p>ক্যামেরা, মাইক ও লোকেশন</p></button>
-  <button class="feature" onclick="page('battery')"><span>🔋</span><h3>ব্যাটারি</h3><p>ব্যাটারি ও চার্জের অবস্থা</p></button>
-  <button class="feature" onclick="page('network')"><span>📶</span><h3>নেটওয়ার্ক</h3><p>Wi-Fi ও ইন্টারনেট</p></button>
-  <button class="feature" onclick="page('storage')"><span>💾</span><h3>স্টোরেজ</h3><p>ফোনের জায়গা</p></button>
- </div>
-
- <h3 class="section">⚠️ পরীক্ষার ফলাফল</h3>
- <div class="problem" id="problems">এখনো কোনো স্ক্যান করা হয়নি।</div>
-
-</section>
-
-<section class="page" id="apps">
- <h2 class="heading">📱 অ্যাপ পরীক্ষা</h2>
- <p class="description">এই বিভাগে অ্যাপের সেটিংস পরীক্ষা করার সুবিধা ধাপে ধাপে যুক্ত হবে।</p>
- <div class="setting"><div class="setting-icon">💬</div><div class="setting-info"><h3>WhatsApp</h3><p>পরীক্ষা এখনো যুক্ত হয়নি</p></div></div>
- <div class="setting"><div class="setting-icon">📞</div><div class="setting-info"><h3>IMO</h3><p>পরীক্ষা এখনো যুক্ত হয়নি</p></div></div>
- <div class="setting"><div class="setting-icon">📘</div><div class="setting-info"><h3>Facebook</h3><p>পরীক্ষা এখনো যুক্ত হয়নি</p></div></div>
- <div class="setting"><div class="setting-icon">▶️</div><div class="setting-info"><h3>YouTube</h3><p>পরীক্ষা এখনো যুক্ত হয়নি</p></div></div>
- <p class="description">এই তালিকা দিয়ে এখনো অন্য অ্যাপের ব্যক্তিগত তথ্য পরীক্ষা করা হয় না।</p>
-</section>
-
-<section class="page" id="notifications">
- <h2 class="heading">🔔 নোটিফিকেশন</h2>
- <p class="description">নোটিফিকেশন সেটিংস খুলে অনুমতি পরীক্ষা করুন।</p>
- <div class="setting"><div class="setting-icon">🔔</div><div class="setting-info"><h3>এই অ্যাপের নোটিফিকেশন</h3><p>Android সেটিংসে পরীক্ষা করুন</p></div></div>
- <button class="secondary" onclick="androidSettings('notifications')">নোটিফিকেশন সেটিংস খুলুন</button>
-</section>
-
-<section class="page" id="permissions">
- <h2 class="heading">🔐 অ্যাপ অনুমতি</h2>
- <p class="description">এই অ্যাপের অনুমতি Android সেটিংসে পরীক্ষা করুন।</p>
- <div class="setting"><div class="setting-icon">📷</div><div class="setting-info"><h3>ক্যামেরা</h3><p>এখনো অনুমতি পরীক্ষা করা হয়নি</p></div></div>
- <div class="setting"><div class="setting-icon">🎙️</div><div class="setting-info"><h3>মাইক্রোফোন</h3><p>এখনো অনুমতি পরীক্ষা করা হয়নি</p></div></div>
- <div class="setting"><div class="setting-icon">📍</div><div class="setting-info"><h3>লোকেশন</h3><p>এখনো অনুমতি পরীক্ষা করা হয়নি</p></div></div>
- <button class="secondary" onclick="androidSettings('permissions')">অনুমতি সেটিংস খুলুন</button>
-</section>
-
-<section class="page" id="battery">
- <h2 class="heading">🔋 ব্যাটারি</h2>
- <p class="description">ফোনের প্রকৃত ব্যাটারি ও চার্জের তথ্য।</p>
-
- <div class="setting">
-  <div class="setting-icon">🔋</div>
-  <div class="setting-info">
-   <h3>ব্যাটারির চার্জ</h3>
-   <p id="batteryInfo">এখনো পরীক্ষা হয়নি</p>
-  </div>
- </div>
-
- <div class="setting">
-  <div class="setting-icon">⚡</div>
-  <div class="setting-info">
-   <h3>চার্জের অবস্থা</h3>
-   <p id="chargingInfo">এখনো পরীক্ষা হয়নি</p>
-  </div>
- </div>
-
- <button class="secondary" onclick="androidSettings('battery')">ব্যাটারি সেটিংস খুলুন</button>
-</section>
-
-<section class="page" id="network">
- <h2 class="heading">📶 নেটওয়ার্ক</h2>
- <p class="description">নেটওয়ার্ক সেটিংস খুলে Wi-Fi পরীক্ষা করুন।</p>
- <div class="setting"><div class="setting-icon">📡</div><div class="setting-info"><h3>Wi-Fi</h3><p>Android সেটিংসে পরীক্ষা করুন</p></div></div>
- <div class="setting"><div class="setting-icon">🌐</div><div class="setting-info"><h3>মোবাইল ডেটা</h3><p>Android সেটিংসে পরীক্ষা করুন</p></div></div>
- <div class="setting"><div class="setting-icon">🔒</div><div class="setting-info"><h3>Private DNS</h3><p>Android সেটিংসে পরীক্ষা করুন</p></div></div>
- <button class="secondary" onclick="androidSettings('network')">নেটওয়ার্ক সেটিংস খুলুন</button>
-</section>
-
-<section class="page" id="storage">
- <h2 class="heading">💾 স্টোরেজ</h2>
- <p class="description">ফোনের প্রকৃত ব্যবহৃত ও খালি জায়গা।</p>
-
- <div class="setting">
-  <div class="setting-icon">💾</div>
-  <div class="setting-info">
-   <h3>মোট স্টোরেজ</h3>
-   <p id="storageTotalInfo">এখনো পরীক্ষা হয়নি</p>
-  </div>
- </div>
-
- <div class="setting">
-  <div class="setting-icon">📂</div>
-  <div class="setting-info">
-   <h3>ব্যবহৃত স্টোরেজ</h3>
-   <p id="storageUsedInfo">এখনো পরীক্ষা হয়নি</p>
-  </div>
- </div>
-
- <div class="setting">
-  <div class="setting-icon">✅</div>
-  <div class="setting-info">
-   <h3>খালি স্টোরেজ</h3>
-   <p id="storageFreeInfo">এখনো পরীক্ষা হয়নি</p>
-  </div>
- </div>
-
- <button class="secondary" onclick="androidSettings('storage')">স্টোরেজ সেটিংস খুলুন</button>
-</section>
-
-<section class="page" id="settings">
- <h2 class="heading">⚙️ সেটিংস</h2>
- <div class="setting"><div class="setting-icon">🩺</div><div class="setting-info"><h3>SABBIR AI PHONE DOCTOR</h3><p>ফোনের যত্নে সহায়ক অ্যাপ</p></div></div>
- <div class="setting"><div class="setting-icon">🔒</div><div class="setting-info"><h3>গোপনীয়তা</h3><p>এই সংস্করণে স্ক্যানের তথ্য ফোনেই দেখানো হয়।</p></div></div>
- <div class="setting"><div class="setting-icon">👨‍💻</div><div class="setting-info"><h3>Developer</h3><p>Sabbir Ahmed</p></div></div>
- <div class="setting"><div class="setting-icon">ℹ️</div><div class="setting-info"><h3>অ্যাপ সংস্করণ</h3><p>Version 1.0</p></div></div>
-</section>
-
-<div class="footer">
- SABBIR AI PHONE DOCTOR<br>
- Developer: Sabbir Ahmed<br>
- আপনার ফোন, আপনার নিয়ন্ত্রণ।
+<div class="welcome">
+<h3>স্বাগতম!</h3>
+<p>ফোনের ব্যাটারি, স্টোরেজ ও প্রয়োজনীয় সেটিংস সম্পর্কে তথ্য দেখুন। সমস্যা সমাধানের জন্য সঠিক সেটিংসে যান।</p>
 </div>
 
-</main>
-
-<nav class="bottom">
- <button class="nav active" onclick="page('home',this)"><b>⌂</b>হোম</button>
- <button class="nav" onclick="page('apps',this)"><b>▦</b>অ্যাপ</button>
- <button class="nav" onclick="page('notifications',this)"><b>♧</b>অ্যালার্ট</button>
- <button class="nav" onclick="page('permissions',this)"><b>♙</b>অনুমতি</button>
- <button class="nav" onclick="page('settings',this)"><b>⚙</b>সেটিংস</button>
-</nav>
-
-<div class="overlay" id="overlay">
- <div class="modal">
-  <div class="loader" id="loader"></div>
-  <h3 id="modalTitle">ফোন পরীক্ষা চলছে</h3>
-  <p id="modalText">প্রকৃত তথ্য সংগ্রহ করা হচ্ছে...</p>
-  <button class="close" id="close" onclick="closeScan()">বন্ধ করুন</button>
- </div>
+<div class="card">
+<h3>📱 ফোন পরীক্ষা</h3>
+<p class="muted">আপনার ফোনের ব্যাটারি ও স্টোরেজের তথ্য সংগ্রহ করুন।</p>
+<button class="scanbtn" onclick="scan()">🔍 এখনই পরীক্ষা করুন</button>
 </div>
+
+<div class="card">
+<h3>🔋 ব্যাটারি তথ্য</h3>
+<div class="info"><span>ব্যাটারি</span><strong id="batteryInfo">পরীক্ষা হয়নি</strong></div>
+<div class="info"><span>চার্জের অবস্থা</span><strong id="chargingInfo">—</strong></div>
+</div>
+
+<div class="card">
+<h3>💾 স্টোরেজ তথ্য</h3>
+<div class="info"><span>মোট জায়গা</span><strong id="storageTotalInfo">—</strong></div>
+<div class="info"><span>ব্যবহৃত জায়গা</span><strong id="storageUsedInfo">—</strong></div>
+<div class="info"><span>খালি জায়গা</span><strong id="storageFreeInfo">—</strong></div>
+</div>
+
+<div class="grid">
+<div class="tile" onclick="page('apps')"><div class="emoji">📲</div><p>অ্যাপস</p></div>
+<div class="tile" onclick="page('notifications')"><div class="emoji">🔔</div><p>নোটিফিকেশন</p></div>
+<div class="tile" onclick="page('battery')"><div class="emoji">🔋</div><p>ব্যাটারি</p></div>
+<div class="tile" onclick="page('storage')"><div class="emoji">💾</div><p>স্টোরেজ</p></div>
+<div class="tile" onclick="page('network')"><div class="emoji">📶</div><p>নেটওয়ার্ক</p></div>
+<div class="tile" onclick="page('permissions')"><div class="emoji">🔐</div><p>অনুমতি</p></div>
+</div>
+
+</section>
+
+<section id="apps" class="section">
+<div class="card">
+<h3>📲 আপনার অ্যাপস</h3>
+<p class="muted">নিচের বোতামে চাপ দিলে সংশ্লিষ্ট অ্যাপের সেটিংস খোলার চেষ্টা করা হবে।</p>
+
+<div class="app">
+<div><span class="appname">WhatsApp</span><small>নোটিফিকেশন সেটিংস</small></div>
+<button onclick="openApp('com.whatsapp')">খুলুন</button>
+</div>
+
+<div class="app">
+<div><span class="appname">IMO</span><small>নোটিফিকেশন সেটিংস</small></div>
+<button onclick="openApp('com.imo.android.imoim')">খুলুন</button>
+</div>
+
+<div class="app">
+<div><span class="appname">Facebook</span><small>নোটিফিকেশন সেটিংস</small></div>
+<button onclick="openApp('com.facebook.katana')">খুলুন</button>
+</div>
+
+<div class="app">
+<div><span class="appname">YouTube</span><small>নোটিফিকেশন সেটিংস</small></div>
+<button onclick="openApp('com.google.android.youtube')">খুলুন</button>
+</div>
+</div>
+</section>
+
+<section id="notifications" class="section">
+<div class="card">
+<h3>🔔 নোটিফিকেশন</h3>
+<p class="muted">প্রতিটি অ্যাপের নোটিফিকেশন চালু বা বন্ধ করার সেটিংস দেখতে অ্যাপস পৃষ্ঠায় যান।</p>
+<button onclick="page('apps')">অ্যাপের তালিকা দেখুন</button>
+</div>
+<div class="card">
+<h3>নিজের অ্যাপের নোটিফিকেশন</h3>
+<p class="muted">SABBIR AI PHONE DOCTOR-এর নোটিফিকেশন অনুমতি ও সেটিংস খুলুন।</p>
+<button onclick="androidSettings('notifications')">সেটিংস খুলুন</button>
+</div>
+</section>
+
+<section id="battery" class="section">
+<div class="card">
+<h3>🔋 ব্যাটারি সেটিংস</h3>
+<p class="muted">ব্যাটারি সেভার ও ব্যাটারি সংক্রান্ত সেটিংস দেখুন।</p>
+<button onclick="androidSettings('battery')">ব্যাটারি সেটিংস খুলুন</button>
+</div>
+</section>
+
+<section id="storage" class="section">
+<div class="card">
+<h3>💾 স্টোরেজ সেটিংস</h3>
+<p class="muted">ফোনের জায়গা ও স্টোরেজ ব্যবস্থাপনা দেখুন।</p>
+<button onclick="androidSettings('storage')">স্টোরেজ সেটিংস খুলুন</button>
+</div>
+</section>
+
+<section id="network" class="section">
+<div class="card">
+<h3>📶 নেটওয়ার্ক সেটিংস</h3>
+<p class="muted">Wi-Fi ও নেটওয়ার্ক সংক্রান্ত সেটিংস খুলুন।</p>
+<button onclick="androidSettings('network')">Wi-Fi সেটিংস খুলুন</button>
+</div>
+</section>
+
+<section id="permissions" class="section">
+<div class="card">
+<h3>🔐 অ্যাপ অনুমতি</h3>
+<p class="muted">এই অ্যাপের অনুমতিগুলো দেখতে Android সেটিংস খুলুন।</p>
+<button onclick="androidSettings('permissions')">অনুমতি দেখুন</button>
+</div>
+</section>
+
+<section id="settings" class="section">
+<div class="card">
+<h3>⚙️ সেটিংস</h3>
+<p class="muted">SABBIR AI PHONE DOCTOR</p>
+<p>Developer: Sabbir Ahmed</p>
+<p class="muted">আপনার ব্যক্তিগত মেসেজ, ছবি বা পাসওয়ার্ড পড়া হয় না।</p>
+</div>
+</section>
+
+</div>
+
+<div class="nav">
+<button class="selected" onclick="page('home',this)">🏠<br>হোম</button>
+<button onclick="page('apps',this)">📲<br>অ্যাপস</button>
+<button onclick="page('notifications',this)">🔔<br>নোটিফাই</button>
+<button onclick="page('settings',this)">⚙️<br>সেটিংস</button>
+</div>
+
+<div id="overlay">
+<div class="modal">
+<h3 id="modalTitle">ফোন পরীক্ষা</h3>
+<p id="modalText">তথ্য সংগ্রহ করা হচ্ছে...</p>
+<button onclick="closeScan()">ঠিক আছে</button>
+</div>
+</div>
+
+<footer>© SABBIR AI PHONE DOCTOR · Sabbir Ahmed</footer>
 
 <script>
-function page(id,btn){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+function page(id,button){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ const target=document.getElementById(id);
+ if(target) target.classList.add('active');
 
- document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
-
- if(btn){
-  btn.classList.add('active');
- }else{
-  document.querySelectorAll('.nav').forEach(n=>{
-   if(n.getAttribute('onclick').includes("'"+id+"'")){
-    n.classList.add('active');
-   }
-  });
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('selected'));
+ if(button) button.classList.add('selected');
+ else {
+  const navButtons=document.querySelectorAll('.nav button');
+  if(id==='home')navButtons[0].classList.add('selected');
+  if(id==='apps')navButtons[1].classList.add('selected');
+  if(id==='notifications')navButtons[2].classList.add('selected');
+  if(id==='settings')navButtons[3].classList.add('selected');
  }
-
  window.scrollTo(0,0);
 }
 
-function banglaNumber(n){
- return Number(n).toLocaleString('bn-BD');
+function banglaNumber(value){
+ return String(value).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
 }
 
 function formatBytes(bytes){
- if(bytes<=0) return '০ GB';
- return (bytes/(1024*1024*1024)).toFixed(2)+' GB';
+ if(!bytes || bytes<0)return 'তথ্য নেই';
+ const gb=bytes/1024/1024/1024;
+ return banglaNumber(gb.toFixed(2))+' GB';
 }
 
 function scan(){
- const overlay=document.getElementById('overlay');
- overlay.classList.add('show');
+ document.getElementById('overlay').classList.add('show');
+ document.getElementById('modalTitle').innerText='ফোন পরীক্ষা';
+ document.getElementById('modalText').innerText='তথ্য সংগ্রহ করা হচ্ছে...';
 
- document.getElementById('loader').style.display='block';
- document.getElementById('close').style.display='none';
- document.getElementById('modalTitle').textContent='ফোন পরীক্ষা চলছে';
- document.getElementById('modalText').textContent='ব্যাটারি ও স্টোরেজের প্রকৃত তথ্য সংগ্রহ করা হচ্ছে...';
-
- setTimeout(()=>{
-  try{
-   if(!window.PhoneDoctor){
-    throw new Error('Android সংযোগ পাওয়া যায়নি');
-   }
-
-   const data=JSON.parse(PhoneDoctor.getReport());
-
-   if(!data.success){
-    throw new Error('তথ্য পাওয়া যায়নি');
-   }
-
-   const battery=data.battery;
-   const charging=data.charging;
-   const total=data.storageTotal;
-   const free=data.storageFree;
-
-   if(!total || total<=0 || battery<0){
-    throw new Error('অসম্পূর্ণ তথ্য পাওয়া গেছে');
-   }
-
-   const used=total-free;
-   const freePercent=Math.round((free/total)*100);
-
-   document.getElementById('status').textContent='পরীক্ষা সম্পন্ন';
-   document.getElementById('score').innerHTML=
-    banglaNumber(freePercent)+'<small>%</small>';
-
-   document.getElementById('bar').style.width=
-    Math.max(0,Math.min(100,freePercent))+'%';
-
-   document.getElementById('batteryInfo').textContent=
-    banglaNumber(battery)+'%';
-
-   document.getElementById('chargingInfo').textContent=
-    charging?'চার্জ হচ্ছে':'চার্জ হচ্ছে না';
-
-   document.getElementById('storageTotalInfo').textContent=
-    formatBytes(total);
-
-   document.getElementById('storageUsedInfo').textContent=
-    formatBytes(used);
-
-   document.getElementById('storageFreeInfo').textContent=
-    formatBytes(free);
-
-   let result=
-    '✅ ফোনের প্রাথমিক পরীক্ষা সম্পন্ন\n\n'+
-    '🔋 ব্যাটারি: '+banglaNumber(battery)+'%\n'+
-    '⚡ চার্জ: '+(charging?'হচ্ছে':'হচ্ছে না')+'\n\n'+
-    '💾 মোট স্টোরেজ: '+formatBytes(total)+'\n'+
-    '📂 ব্যবহৃত: '+formatBytes(used)+'\n'+
-    '✅ খালি: '+formatBytes(free)+'\n\n';
-
-   if(freePercent<10){
-    result+='⚠️ স্টোরেজ প্রায় পূর্ণ। কিছু অপ্রয়োজনীয় ফাইল সরানোর কথা ভাবতে পারেন।';
-   }else{
-    result+='স্টোরেজে পর্যাপ্ত খালি জায়গা রয়েছে।';
-   }
-
-   result+='\n\nমনে রাখবেন: এটি সম্পূর্ণ ফোনের নিরাপত্তা পরীক্ষা নয়।';
-
-   document.getElementById('problems').textContent=result;
-
-   document.getElementById('loader').style.display='none';
-   document.getElementById('modalTitle').textContent='পরীক্ষা সম্পন্ন হয়েছে';
-   document.getElementById('modalText').textContent=
-    'আপনার ফোনের ব্যাটারি ও স্টোরেজের প্রকৃত তথ্য পাওয়া গেছে।';
-   document.getElementById('close').style.display='block';
-
-  }catch(error){
-   document.getElementById('loader').style.display='none';
-   document.getElementById('modalTitle').textContent='পরীক্ষা করা যায়নি';
-   document.getElementById('modalText').textContent=
-    'Android থেকে তথ্য পাওয়া যায়নি। অ্যাপটি বন্ধ করে আবার খুলে চেষ্টা করুন।';
-   document.getElementById('close').style.display='block';
+ try{
+  if(!window.PhoneDoctor){
+   throw new Error('Android সংযোগ পাওয়া যায়নি');
   }
- },500);
+
+  const report=JSON.parse(PhoneDoctor.getReport());
+
+  if(!report.success){
+   throw new Error('তথ্য পাওয়া যায়নি');
+  }
+
+  document.getElementById('batteryInfo').innerText=
+   report.battery>=0 ? banglaNumber(report.battery)+'%' : 'তথ্য নেই';
+
+  document.getElementById('chargingInfo').innerText=
+   report.charging ? 'চার্জ হচ্ছে' : 'চার্জ হচ্ছে না';
+
+  const used=report.storageTotal-report.storageFree;
+
+  document.getElementById('storageTotalInfo').innerText=formatBytes(report.storageTotal);
+  document.getElementById('storageUsedInfo').innerText=formatBytes(used);
+  document.getElementById('storageFreeInfo').innerText=formatBytes(report.storageFree);
+
+  document.getElementById('modalTitle').innerText='পরীক্ষা সম্পন্ন';
+  document.getElementById('modalText').innerText=
+   'ব্যাটারি ও স্টোরেজের তথ্য পাওয়া গেছে। বিস্তারিত হোম পৃষ্ঠায় দেখুন।';
+
+ }catch(error){
+  document.getElementById('modalTitle').innerText='তথ্য পাওয়া যায়নি';
+  document.getElementById('modalText').innerText=
+   'ফোনের তথ্য সংগ্রহ করা যায়নি। আবার চেষ্টা করুন।';
+ }
 }
 
 function closeScan(){
@@ -377,8 +354,16 @@ function androidSettings(type){
   alert('Android সংযোগ পাওয়া যায়নি।');
  }
 }
+
+function openApp(packageName){
+ if(window.PhoneDoctor){
+  PhoneDoctor.openAppSettings(packageName);
+ }else{
+  alert('Android সংযোগ পাওয়া যায়নি।');
+ }
+}
 </script>
 
 </body>
-   </html>
-   
+ </html>
+ 
