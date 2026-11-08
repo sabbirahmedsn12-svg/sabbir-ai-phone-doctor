@@ -2,258 +2,153 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SABBIR AI PHONE DOCTOR</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f1f7f3;
- color:#183b2b;
- padding-bottom:85px
-}
-header{
- background:#087847;
- color:white;
- padding:22px 17px;
- border-radius:0 0 22px 22px
-}
-header h2{margin:0;font-size:21px}
-header p{margin:7px 0 0;font-size:13px;color:#e0f5e9}
+body{margin:0;background:#f1f7f3;color:#193c2b;font-family:Arial,sans-serif;padding-bottom:80px}
+header{background:#087847;color:white;padding:22px 17px;border-radius:0 0 22px 22px}
+header h2{font-size:20px;margin:0}
+header p{font-size:13px;margin:7px 0 0}
 .container{padding:15px}
-.welcome{
- background:linear-gradient(135deg,#087847,#16a36b);
- color:white;
- padding:20px;
- border-radius:17px;
- margin-bottom:15px
-}
-.welcome h3{margin:0 0 8px}
-.welcome p{font-size:13px;line-height:1.6;margin:0}
-.card{
- background:white;
- border-radius:15px;
- padding:17px;
- margin-bottom:14px;
- box-shadow:0 3px 12px #0000000b
-}
+.hero{background:linear-gradient(135deg,#087847,#19a36b);color:white;padding:20px;border-radius:17px;margin-bottom:15px}
+.hero h3{margin:0 0 8px}
+.hero p{font-size:13px;line-height:1.6;margin:0}
+.card{background:white;border-radius:15px;padding:16px;margin-bottom:14px;box-shadow:0 3px 12px #0000000a}
 .card h3{margin:0 0 12px;font-size:17px}
-button{
- border:0;
- border-radius:10px;
- padding:12px 15px;
- background:#087847;
- color:white;
- font-size:14px;
- font-weight:bold;
- cursor:pointer
-}
-.scanbtn{width:100%;padding:15px;font-size:16px}
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:11px
-}
-.tile{
- background:white;
- padding:17px 10px;
- border-radius:14px;
- text-align:center;
- box-shadow:0 3px 10px #00000008;
- cursor:pointer
-}
-.tile .emoji{font-size:27px}
-.tile p{margin:8px 0 0;font-weight:bold;font-size:14px}
-.info{
- display:flex;
- justify-content:space-between;
- padding:9px 0;
- border-bottom:1px solid #edf1ee;
- font-size:14px
-}
-.app{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:8px;
- padding:13px 0;
- border-bottom:1px solid #edf1ee
-}
-.appname{font-weight:bold;font-size:14px}
-.app small{display:block;color:#77877d;margin-top:4px}
-.app button{padding:10px;font-size:12px;white-space:nowrap}
+button{background:#087847;color:white;border:0;border-radius:10px;padding:12px;font-weight:bold;font-size:14px}
+.scan{width:100%;padding:16px;font-size:16px}
+.muted{font-size:13px;color:#718176;line-height:1.6}
+.info{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #edf1ee;font-size:14px}
+.info strong{text-align:right}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tile{background:white;padding:17px 8px;border-radius:14px;text-align:center;box-shadow:0 3px 10px #00000008}
+.tile div{font-size:26px}
+.tile p{font-size:14px;font-weight:bold;margin:8px 0 0}
 .section{display:none}
 .section.active{display:block}
-.nav{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- background:white;
- display:flex;
- justify-content:space-around;
- padding:12px 3px;
- box-shadow:0 -3px 12px #00000012
-}
-.nav button{
- background:transparent;
- color:#456353;
- padding:8px 5px;
- font-size:12px
-}
+.app{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #edf1ee}
+.app small{display:block;color:#718176;margin-top:4px}
+.app button{font-size:12px;padding:10px}
+.status{font-weight:bold;font-size:13px}
+.good{color:#087847}
+.warn{color:#b46b00}
+.bad{color:#c0392b}
+.issue{padding:12px;margin:9px 0;border-radius:10px;background:#fff5e7;font-size:13px;line-height:1.6}
+.ok{padding:12px;background:#e9f8ef;border-radius:10px;color:#087847;font-size:13px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 3px;box-shadow:0 -3px 12px #00000012}
+.nav button{background:transparent;color:#456353;padding:8px 5px;font-size:12px}
 .nav button.selected{color:#087847}
-.muted{font-size:13px;color:#728176;line-height:1.6}
-#overlay{
- display:none;
- position:fixed;
- inset:0;
- background:#0008;
- z-index:10;
- align-items:center;
- justify-content:center;
- padding:20px
-}
+#overlay{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:center;justify-content:center;padding:20px}
 #overlay.show{display:flex}
-.modal{
- background:white;
- border-radius:16px;
- padding:22px;
- width:100%;
- max-width:350px;
- text-align:center
-}
+.modal{background:white;border-radius:16px;padding:22px;width:100%;max-width:350px;text-align:center}
 .modal h3{margin-top:0}
 .modal button{margin-top:12px}
 footer{text-align:center;color:#809087;font-size:12px;padding:15px}
 </style>
 </head>
-
 <body>
 
 <header>
 <h2>🛡️ SABBIR AI PHONE DOCTOR</h2>
-<p>আপনার ফোনের যত্নে স্মার্ট সহকারী</p>
+<p>আপনার ফোনের স্মার্ট স্বাস্থ্য পরীক্ষা</p>
 </header>
 
 <div class="container">
 
 <section id="home" class="section active">
-
-<div class="welcome">
-<h3>স্বাগতম!</h3>
-<p>ফোনের ব্যাটারি, স্টোরেজ ও প্রয়োজনীয় সেটিংস সম্পর্কে তথ্য দেখুন। সমস্যা সমাধানের জন্য সঠিক সেটিংসে যান।</p>
+<div class="hero">
+<h3>আপনার ফোন কেমন আছে?</h3>
+<p>ফোন পরীক্ষা করুন। পাওয়া তথ্যের ভিত্তিতে সমস্যা ও করণীয় দেখুন।</p>
 </div>
 
 <div class="card">
 <h3>📱 ফোন পরীক্ষা</h3>
-<p class="muted">আপনার ফোনের ব্যাটারি ও স্টোরেজের তথ্য সংগ্রহ করুন।</p>
-<button class="scanbtn" onclick="scan()">🔍 এখনই পরীক্ষা করুন</button>
+<p class="muted">ব্যাটারি, স্টোরেজ, নেটওয়ার্ক, নোটিফিকেশন ও নির্বাচিত অ্যাপ পরীক্ষা করুন।</p>
+<button class="scan" onclick="scan()">🔍 এখনই পরীক্ষা করুন</button>
+<p class="muted" id="lastScan">এখনো পরীক্ষা করা হয়নি</p>
 </div>
 
 <div class="card">
-<h3>🔋 ব্যাটারি তথ্য</h3>
-<div class="info"><span>ব্যাটারি</span><strong id="batteryInfo">পরীক্ষা হয়নি</strong></div>
-<div class="info"><span>চার্জের অবস্থা</span><strong id="chargingInfo">—</strong></div>
+<h3>📊 পরীক্ষার ফলাফল</h3>
+<div class="info"><span>ব্যাটারি</span><strong id="batteryInfo">—</strong></div>
+<div class="info"><span>চার্জ</span><strong id="chargingInfo">—</strong></div>
+<div class="info"><span>স্টোরেজ</span><strong id="storageFreeInfo">—</strong></div>
+<div class="info"><span>ইন্টারনেট</span><strong id="internetInfo">—</strong></div>
+<div class="info"><span>Wi-Fi</span><strong id="wifiInfo">—</strong></div>
+<div class="info"><span>এই অ্যাপের নোটিফিকেশন</span><strong id="notificationInfo">—</strong></div>
 </div>
 
 <div class="card">
-<h3>💾 স্টোরেজ তথ্য</h3>
-<div class="info"><span>মোট জায়গা</span><strong id="storageTotalInfo">—</strong></div>
-<div class="info"><span>ব্যবহৃত জায়গা</span><strong id="storageUsedInfo">—</strong></div>
-<div class="info"><span>খালি জায়গা</span><strong id="storageFreeInfo">—</strong></div>
+<h3>🩺 সমস্যা ও পরামর্শ</h3>
+<div id="issues"><p class="muted">পরীক্ষার পর এখানে ফলাফল দেখাবে।</p></div>
 </div>
 
 <div class="grid">
-<div class="tile" onclick="page('apps')"><div class="emoji">📲</div><p>অ্যাপস</p></div>
-<div class="tile" onclick="page('notifications')"><div class="emoji">🔔</div><p>নোটিফিকেশন</p></div>
-<div class="tile" onclick="page('battery')"><div class="emoji">🔋</div><p>ব্যাটারি</p></div>
-<div class="tile" onclick="page('storage')"><div class="emoji">💾</div><p>স্টোরেজ</p></div>
-<div class="tile" onclick="page('network')"><div class="emoji">📶</div><p>নেটওয়ার্ক</p></div>
-<div class="tile" onclick="page('permissions')"><div class="emoji">🔐</div><p>অনুমতি</p></div>
+<div class="tile" onclick="page('apps')"><div>📲</div><p>অ্যাপ পরীক্ষা</p></div>
+<div class="tile" onclick="page('notifications')"><div>🔔</div><p>নোটিফিকেশন</p></div>
+<div class="tile" onclick="page('battery')"><div>🔋</div><p>ব্যাটারি</p></div>
+<div class="tile" onclick="page('storage')"><div>💾</div><p>স্টোরেজ</p></div>
+<div class="tile" onclick="page('network')"><div>📶</div><p>নেটওয়ার্ক</p></div>
+<div class="tile" onclick="page('settings')"><div>⚙️</div><p>সেটিংস</p></div>
 </div>
-
 </section>
 
 <section id="apps" class="section">
 <div class="card">
-<h3>📲 আপনার অ্যাপস</h3>
-<p class="muted">নিচের বোতামে চাপ দিলে সংশ্লিষ্ট অ্যাপের সেটিংস খোলার চেষ্টা করা হবে।</p>
-
-<div class="app">
-<div><span class="appname">WhatsApp</span><small>নোটিফিকেশন সেটিংস</small></div>
-<button onclick="openApp('com.whatsapp')">খুলুন</button>
-</div>
-
-<div class="app">
-<div><span class="appname">IMO</span><small>নোটিফিকেশন সেটিংস</small></div>
-<button onclick="openApp('com.imo.android.imoim')">খুলুন</button>
-</div>
-
-<div class="app">
-<div><span class="appname">Facebook</span><small>নোটিফিকেশন সেটিংস</small></div>
-<button onclick="openApp('com.facebook.katana')">খুলুন</button>
-</div>
-
-<div class="app">
-<div><span class="appname">YouTube</span><small>নোটিফিকেশন সেটিংস</small></div>
-<button onclick="openApp('com.google.android.youtube')">খুলুন</button>
-</div>
+<h3>📲 ইনস্টল করা অ্যাপ পরীক্ষা</h3>
+<p class="muted">এই পরীক্ষায় শুধু নির্বাচিত অ্যাপ ফোনে ইনস্টল আছে কি না দেখা হয়।</p>
+<div id="appList"><p class="muted">প্রথমে ফোন পরীক্ষা করুন।</p></div>
 </div>
 </section>
 
 <section id="notifications" class="section">
 <div class="card">
-<h3>🔔 নোটিফিকেশন</h3>
-<p class="muted">প্রতিটি অ্যাপের নোটিফিকেশন চালু বা বন্ধ করার সেটিংস দেখতে অ্যাপস পৃষ্ঠায় যান।</p>
-<button onclick="page('apps')">অ্যাপের তালিকা দেখুন</button>
-</div>
-<div class="card">
-<h3>নিজের অ্যাপের নোটিফিকেশন</h3>
-<p class="muted">SABBIR AI PHONE DOCTOR-এর নোটিফিকেশন অনুমতি ও সেটিংস খুলুন।</p>
-<button onclick="androidSettings('notifications')">সেটিংস খুলুন</button>
+<h3>🔔 নোটিফিকেশন পরীক্ষা</h3>
+<p class="muted">এখানে শুধু SABBIR AI PHONE DOCTOR-এর নোটিফিকেশন অনুমতি পরীক্ষা করা হয়।</p>
+<div id="notificationDetail">প্রথমে ফোন পরীক্ষা করুন।</div>
+<button onclick="androidSettings('notifications')">নিজের অ্যাপের সেটিংস খুলুন</button>
 </div>
 </section>
 
 <section id="battery" class="section">
 <div class="card">
-<h3>🔋 ব্যাটারি সেটিংস</h3>
-<p class="muted">ব্যাটারি সেভার ও ব্যাটারি সংক্রান্ত সেটিংস দেখুন।</p>
+<h3>🔋 ব্যাটারি পরীক্ষা</h3>
+<div class="info"><span>চার্জ</span><strong id="batteryDetail">—</strong></div>
+<div class="info"><span>চার্জের অবস্থা</span><strong id="chargingDetail">—</strong></div>
+<div class="info"><span>তাপমাত্রা</span><strong id="temperatureDetail">—</strong></div>
+<p class="muted">এটি ব্যাটারির চার্জ ও Android-এর দেওয়া তথ্য দেখায়; ব্যাটারির প্রকৃত স্বাস্থ্য বা অবশিষ্ট আয়ু নির্ণয় করে না।</p>
 <button onclick="androidSettings('battery')">ব্যাটারি সেটিংস খুলুন</button>
 </div>
 </section>
 
 <section id="storage" class="section">
 <div class="card">
-<h3>💾 স্টোরেজ সেটিংস</h3>
-<p class="muted">ফোনের জায়গা ও স্টোরেজ ব্যবস্থাপনা দেখুন।</p>
+<h3>💾 স্টোরেজ পরীক্ষা</h3>
+<div class="info"><span>মোট জায়গা</span><strong id="storageTotal">—</strong></div>
+<div class="info"><span>ব্যবহৃত জায়গা</span><strong id="storageUsed">—</strong></div>
+<div class="info"><span>খালি জায়গা</span><strong id="storageFree">—</strong></div>
 <button onclick="androidSettings('storage')">স্টোরেজ সেটিংস খুলুন</button>
 </div>
 </section>
 
 <section id="network" class="section">
 <div class="card">
-<h3>📶 নেটওয়ার্ক সেটিংস</h3>
-<p class="muted">Wi-Fi ও নেটওয়ার্ক সংক্রান্ত সেটিংস খুলুন।</p>
+<h3>📶 নেটওয়ার্ক পরীক্ষা</h3>
+<div class="info"><span>নেটওয়ার্ক সংযোগ</span><strong id="networkDetail">—</strong></div>
+<div class="info"><span>ইন্টারনেট যাচাই</span><strong id="internetDetail">—</strong></div>
+<div class="info"><span>Wi-Fi</span><strong id="wifiDetail">—</strong></div>
+<p class="muted">ইন্টারনেট যাচাই Android-এর নেটওয়ার্ক তথ্যের ভিত্তিতে করা হয়।</p>
 <button onclick="androidSettings('network')">Wi-Fi সেটিংস খুলুন</button>
-</div>
-</section>
-
-<section id="permissions" class="section">
-<div class="card">
-<h3>🔐 অ্যাপ অনুমতি</h3>
-<p class="muted">এই অ্যাপের অনুমতিগুলো দেখতে Android সেটিংস খুলুন।</p>
-<button onclick="androidSettings('permissions')">অনুমতি দেখুন</button>
 </div>
 </section>
 
 <section id="settings" class="section">
 <div class="card">
-<h3>⚙️ সেটিংস</h3>
-<p class="muted">SABBIR AI PHONE DOCTOR</p>
-<p>Developer: Sabbir Ahmed</p>
-<p class="muted">আপনার ব্যক্তিগত মেসেজ, ছবি বা পাসওয়ার্ড পড়া হয় না।</p>
+<h3>⚙️ অ্যাপ সম্পর্কে</h3>
+<p>SABBIR AI PHONE DOCTOR</p>
+<p class="muted">Developer: Sabbir Ahmed</p>
+<p class="muted">ব্যক্তিগত মেসেজ, ছবি বা পাসওয়ার্ড পড়া হয় না।</p>
 </div>
 </section>
 
@@ -277,69 +172,159 @@ footer{text-align:center;color:#809087;font-size:12px;padding:15px}
 <footer>© SABBIR AI PHONE DOCTOR · Sabbir Ahmed</footer>
 
 <script>
+let latestReport=null;
+
 function page(id,button){
  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
- const target=document.getElementById(id);
- if(target) target.classList.add('active');
-
+ document.getElementById(id).classList.add('active');
  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('selected'));
- if(button) button.classList.add('selected');
- else {
-  const navButtons=document.querySelectorAll('.nav button');
-  if(id==='home')navButtons[0].classList.add('selected');
-  if(id==='apps')navButtons[1].classList.add('selected');
-  if(id==='notifications')navButtons[2].classList.add('selected');
-  if(id==='settings')navButtons[3].classList.add('selected');
+ if(button)button.classList.add('selected');
+ else{
+  const buttons=document.querySelectorAll('.nav button');
+  if(id==='home')buttons[0].classList.add('selected');
+  if(id==='apps')buttons[1].classList.add('selected');
+  if(id==='notifications')buttons[2].classList.add('selected');
+  if(id==='settings')buttons[3].classList.add('selected');
  }
  window.scrollTo(0,0);
 }
 
-function banglaNumber(value){
+function bn(value){
  return String(value).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
 }
 
-function formatBytes(bytes){
- if(!bytes || bytes<0)return 'তথ্য নেই';
- const gb=bytes/1024/1024/1024;
- return banglaNumber(gb.toFixed(2))+' GB';
+function bytes(value){
+ if(value===undefined||value===null||value<0)return 'তথ্য নেই';
+ return bn((value/1024/1024/1024).toFixed(2))+' GB';
+}
+
+function showIssue(message,type='warn'){
+ const div=document.createElement('div');
+ div.className='issue '+type;
+ div.textContent=message;
+ document.getElementById('issues').appendChild(div);
 }
 
 function scan(){
- document.getElementById('overlay').classList.add('show');
- document.getElementById('modalTitle').innerText='ফোন পরীক্ষা';
- document.getElementById('modalText').innerText='তথ্য সংগ্রহ করা হচ্ছে...';
+ const overlay=document.getElementById('overlay');
+ overlay.classList.add('show');
+ document.getElementById('modalTitle').innerText='ফোন পরীক্ষা চলছে';
+ document.getElementById('modalText').innerText='ফোনের তথ্য সংগ্রহ করা হচ্ছে...';
 
  try{
-  if(!window.PhoneDoctor){
-   throw new Error('Android সংযোগ পাওয়া যায়নি');
+  if(!window.PhoneDoctor)throw new Error('Android সংযোগ পাওয়া যায়নি');
+
+  const r=JSON.parse(PhoneDoctor.getReport());
+  if(!r.success)throw new Error('পরীক্ষার তথ্য পাওয়া যায়নি');
+
+  latestReport=r;
+
+  const used=r.storageUsed ?? (r.storageTotal-r.storageFree);
+
+  document.getElementById('batteryInfo').innerText=r.battery>=0?bn(r.battery)+'%':'তথ্য নেই';
+  document.getElementById('chargingInfo').innerText=r.charging?'চার্জ হচ্ছে':'চার্জ হচ্ছে না';
+  document.getElementById('storageFreeInfo').innerText=bytes(r.storageFree);
+  document.getElementById('internetInfo').innerText=r.internetAvailable?'চালু':'যাচাই ব্যর্থ';
+  document.getElementById('wifiInfo').innerText=r.wifiConnected?'সংযুক্ত':'সংযুক্ত নয়';
+  document.getElementById('notificationInfo').innerText=r.notificationsEnabled?'চালু':'বন্ধ';
+
+  document.getElementById('batteryDetail').innerText=r.battery>=0?bn(r.battery)+'%':'তথ্য নেই';
+  document.getElementById('chargingDetail').innerText=r.charging?'চার্জ হচ্ছে':'চার্জ হচ্ছে না';
+  document.getElementById('temperatureDetail').innerText=r.batteryTemperature>=0?bn(r.batteryTemperature.toFixed(1))+'°C':'তথ্য নেই';
+
+  document.getElementById('storageTotal').innerText=bytes(r.storageTotal);
+  document.getElementById('storageUsed').innerText=bytes(used);
+  document.getElementById('storageFree').innerText=bytes(r.storageFree);
+
+  document.getElementById('networkDetail').innerText=r.networkConnected?'সংযুক্ত':'সংযুক্ত নয়';
+  document.getElementById('internetDetail').innerText=r.internetAvailable?'ইন্টারনেট যাচাই সফল':'ইন্টারনেট যাচাই সফল হয়নি';
+  document.getElementById('wifiDetail').innerText=r.wifiConnected?'Wi-Fi সংযুক্ত':'Wi-Fi সংযুক্ত নয়';
+
+  const issues=document.getElementById('issues');
+  issues.innerHTML='';
+  let count=0;
+
+  if(r.battery>=0 && r.battery<=15){
+   showIssue('ব্যাটারির চার্জ কম। প্রয়োজন হলে চার্জ দিন।');
+   count++;
   }
 
-  const report=JSON.parse(PhoneDoctor.getReport());
-
-  if(!report.success){
-   throw new Error('তথ্য পাওয়া যায়নি');
+  if(r.batteryTemperature>=45){
+   showIssue('ব্যাটারির তাপমাত্রা বেশি দেখাচ্ছে। ফোন ঠান্ডা হতে দিন।');
+   count++;
   }
 
-  document.getElementById('batteryInfo').innerText=
-   report.battery>=0 ? banglaNumber(report.battery)+'%' : 'তথ্য নেই';
+  if(r.storageTotal>0 && (r.storageFree/r.storageTotal)<0.10){
+   showIssue('ফোনের খালি স্টোরেজ ১০%-এর কম। অপ্রয়োজনীয় ফাইল পর্যালোচনা করুন।');
+   count++;
+  }
 
-  document.getElementById('chargingInfo').innerText=
-   report.charging ? 'চার্জ হচ্ছে' : 'চার্জ হচ্ছে না';
+  if(!r.networkConnected){
+   showIssue('নেটওয়ার্ক সংযোগ পাওয়া যায়নি। Wi-Fi বা মোবাইল ডেটা পরীক্ষা করুন।');
+   count++;
+  }else if(!r.internetAvailable){
+   showIssue('ইন্টারনেট যাচাই সফল হয়নি। সংযোগ বা রাউটার পরীক্ষা করুন।');
+   count++;
+  }
 
-  const used=report.storageTotal-report.storageFree;
+  if(!r.notificationsEnabled){
+   showIssue('এই অ্যাপের নোটিফিকেশন বন্ধ। সেটিংস থেকে চালু করতে পারেন।');
+   count++;
+  }
 
-  document.getElementById('storageTotalInfo').innerText=formatBytes(report.storageTotal);
-  document.getElementById('storageUsedInfo').innerText=formatBytes(used);
-  document.getElementById('storageFreeInfo').innerText=formatBytes(report.storageFree);
+  if(count===0){
+   const ok=document.createElement('div');
+   ok.className='ok';
+   ok.textContent='পরীক্ষা করা তথ্যের মধ্যে উল্লেখযোগ্য সমস্যা পাওয়া যায়নি।';
+   issues.appendChild(ok);
+  }
+
+  // Installed app list
+  const appList=document.getElementById('appList');
+  appList.innerHTML='';
+
+  (r.apps||[]).forEach(app=>{
+   const row=document.createElement('div');
+   row.className='app';
+
+   const left=document.createElement('div');
+   const name=document.createElement('strong');
+   name.textContent=app.name;
+   const detail=document.createElement('small');
+   detail.textContent=app.installed?'ইনস্টল করা আছে':'ইনস্টল পাওয়া যায়নি';
+   left.appendChild(name);
+   left.appendChild(detail);
+
+   row.appendChild(left);
+
+   const status=document.createElement('span');
+   status.className='status '+(app.installed?'good':'warn');
+   status.textContent=app.installed?'✓ আছে':'নেই';
+   row.appendChild(status);
+
+   if(app.installed){
+    const button=document.createElement('button');
+    button.textContent='নোটিফিকেশন';
+    button.onclick=()=>openApp(app.package);
+    row.appendChild(button);
+   }
+
+   appList.appendChild(row);
+  });
+
+  document.getElementById('notificationDetail').innerText=
+   r.notificationsEnabled?'এই অ্যাপের নোটিফিকেশন চালু আছে।':'এই অ্যাপের নোটিফিকেশন বন্ধ আছে।';
+
+  document.getElementById('lastScan').innerText=
+   'সর্বশেষ পরীক্ষা: '+new Date().toLocaleTimeString('bn-BD');
 
   document.getElementById('modalTitle').innerText='পরীক্ষা সম্পন্ন';
   document.getElementById('modalText').innerText=
-   'ব্যাটারি ও স্টোরেজের তথ্য পাওয়া গেছে। বিস্তারিত হোম পৃষ্ঠায় দেখুন।';
+   count===0?'পরীক্ষা করা তথ্যের মধ্যে উল্লেখযোগ্য সমস্যা পাওয়া যায়নি।':'কিছু বিষয় পরীক্ষা করে দেখার পরামর্শ আছে। বিস্তারিত হোম পৃষ্ঠায় দেখুন।';
 
  }catch(error){
-  document.getElementById('modalTitle').innerText='তথ্য পাওয়া যায়নি';
-  document.getElementById('modalText').innerText=
-   'ফোনের তথ্য সংগ্রহ করা যায়নি। আবার চেষ্টা করুন।';
+  document.getElementById('modalTitle').innerText='পরীক্ষা করা যায়নি';
+  document.getElementById('modalText').innerText=error.message||'আবার চেষ্টা করুন।';
  }
 }
 
@@ -348,22 +333,20 @@ function closeScan(){
 }
 
 function androidSettings(type){
- if(window.PhoneDoctor){
-  PhoneDoctor.openSettings(type);
- }else{
-  alert('Android সংযোগ পাওয়া যায়নি।');
- }
+ if(window.PhoneDoctor)PhoneDoctor.openSettings(type);
+ else alert('Android সংযোগ পাওয়া যায়নি।');
 }
 
 function openApp(packageName){
- if(window.PhoneDoctor){
-  PhoneDoctor.openAppSettings(packageName);
- }else{
-  alert('Android সংযোগ পাওয়া যায়নি।');
- }
+ if(window.PhoneDoctor)PhoneDoctor.openAppSettings(packageName);
+ else alert('Android সংযোগ পাওয়া যায়নি।');
 }
-</script>
 
+// প্রথমবার অ্যাপ খুললে একবার পরীক্ষা
+window.addEventListener('load',function(){
+ setTimeout(scan,700);
+});
+</script>
 </body>
  </html>
  
