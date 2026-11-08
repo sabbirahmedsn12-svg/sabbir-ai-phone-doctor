@@ -2,421 +2,214 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SABBIR AI PHONE DOCTOR</title>
-
 <style>
 *{box-sizing:border-box}
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f2f7f4;
-    color:#183629;
-}
-header{
-    background:#087847;
-    color:white;
-    padding:22px 16px;
-}
+body{margin:0;background:#f1f6f3;color:#18352a;font-family:Arial,sans-serif}
+header{background:#087847;color:white;padding:22px 17px}
 header h2{margin:0;font-size:21px}
-header p{margin:7px 0 0;font-size:13px}
-main{padding:15px;max-width:600px;margin:auto}
-.card{
-    background:white;
-    border-radius:14px;
-    padding:17px;
-    margin-bottom:14px;
-    box-shadow:0 2px 10px #0000000c;
-}
-h3{margin:0 0 12px;font-size:17px}
-p{line-height:1.6}
-.status{
-    padding:12px;
-    background:#edf5ef;
-    border-radius:10px;
-    margin:10px 0;
-    font-size:14px;
-}
-.green{color:#078047;font-weight:bold}
-.red{color:#d32f2f;font-weight:bold}
-button{
-    border:0;
-    border-radius:9px;
-    padding:13px;
-    width:100%;
-    font-size:15px;
-    font-weight:bold;
-    margin:6px 0;
-    background:#087847;
-    color:white;
-}
-button.secondary{background:#e5f1e9;color:#087847}
-button.stop{background:#b83232}
-button:disabled{opacity:.5}
-.stat{
-    display:flex;
-    justify-content:space-between;
-    padding:10px 0;
-    border-bottom:1px solid #edf0ed;
-    font-size:14px;
-}
-.app{
-    padding:11px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    justify-content:space-between;
-    font-size:14px;
-}
-.problem{
-    background:#fff1e9;
-    border-left:4px solid #e56a25;
-    padding:13px;
-    border-radius:8px;
-    margin-top:10px;
-}
-.hidden{display:none}
-footer{
-    text-align:center;
-    padding:20px;
-    color:#777;
-    font-size:12px;
-}
+header p{font-size:13px;margin-bottom:0}
+main{max-width:650px;margin:auto;padding:13px}
+.card{background:white;border-radius:14px;padding:16px;margin-bottom:13px;box-shadow:0 2px 9px #0001}
+h3{font-size:16px;margin:0 0 12px}
+p{font-size:13px;line-height:1.7}
+button{border:0;border-radius:9px;background:#087847;color:white;padding:12px;width:100%;font-weight:bold;margin:5px 0;font-size:14px}
+.secondary{background:#e7f3eb;color:#087847}
+.danger{background:#b83232}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.item{background:#f0f6f2;border-radius:10px;padding:12px;text-align:left}
+.item b{display:block;font-size:13px;margin-bottom:5px}
+.item small{color:#66766c;font-size:11px}
+.stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee;font-size:13px}
+.status{padding:12px;background:#eef6f0;border-radius:9px;font-size:13px;margin:10px 0}
+.problem{padding:13px;background:#fff2e9;border-left:4px solid #e87932;border-radius:8px;margin:9px 0}
+.good{color:#078047;font-weight:bold}
+.bad{color:#c62828;font-weight:bold}
+footer{text-align:center;padding:20px;color:#777;font-size:12px}
 </style>
 </head>
-
 <body>
 
 <header>
-    <h2>🩺 SABBIR AI PHONE DOCTOR</h2>
-    <p>আপনার ফোনের সমস্যা শনাক্ত ও সমাধানের সহকারী</p>
+<h2>🩺 SABBIR AI PHONE DOCTOR</h2>
+<p>আপনার ফোনের পূর্ণাঙ্গ বাংলা ডায়াগনস্টিক সহকারী</p>
 </header>
 
 <main>
 
 <div class="card">
-    <h3>🛡️ Automatic App Guardian</h3>
-
-    <div class="status" id="monitorStatus">
-        মনিটরিং বন্ধ আছে।
-    </div>
-
-    <p style="font-size:13px">
-        WhatsApp, IMO, Facebook, Messenger, Chrome ও YouTube
-        খোলার সময় ফোনের শনাক্তযোগ্য সমস্যা পরীক্ষা করা হবে।
-    </p>
-
-    <button onclick="enableMonitoring()">
-        মনিটরিং চালু করুন
-    </button>
-
-    <button class="stop" onclick="stopMonitoring()">
-        মনিটরিং বন্ধ করুন
-    </button>
-
-    <button class="secondary" onclick="openUsageAccess()">
-        Usage Access অনুমতি দিন
-    </button>
-
-    <div class="status" id="permissionStatus">
-        অনুমতির অবস্থা পরীক্ষা হচ্ছে...
-    </div>
+<h3>🛡️ ফোনের স্বাস্থ্য পরীক্ষা</h3>
+<div class="status" id="monitorStatus">মনিটরিংয়ের অবস্থা পরীক্ষা হচ্ছে...</div>
+<button onclick="scanPhone()">🔍 এখনই ফোন পরীক্ষা করুন</button>
+<button onclick="enableMonitoring()">স্বয়ংক্রিয় মনিটরিং চালু করুন</button>
+<button class="danger" onclick="stopMonitoring()">মনিটরিং বন্ধ করুন</button>
+<button class="secondary" onclick="openUsageAccess()">Usage Access অনুমতি</button>
+<div id="permissionStatus" class="status">অনুমতি পরীক্ষা হচ্ছে...</div>
 </div>
 
 <div class="card">
-    <h3>📊 ফোনের বর্তমান অবস্থা</h3>
-
-    <div class="stat">
-        <span>ব্যাটারি</span>
-        <strong id="battery">--</strong>
-    </div>
-
-    <div class="stat">
-        <span>ব্যাটারির তাপমাত্রা</span>
-        <strong id="temperature">--</strong>
-    </div>
-
-    <div class="stat">
-        <span>চার্জ হচ্ছে</span>
-        <strong id="charging">--</strong>
-    </div>
-
-    <div class="stat">
-        <span>মোট স্টোরেজ</span>
-        <strong id="totalStorage">--</strong>
-    </div>
-
-    <div class="stat">
-        <span>খালি স্টোরেজ</span>
-        <strong id="freeStorage">--</strong>
-    </div>
-
-    <div class="stat">
-        <span>ইন্টারনেট</span>
-        <strong id="internet">--</strong>
-    </div>
-
-    <button class="secondary" onclick="scanPhone()">
-        আবার পরীক্ষা করুন
-    </button>
+<h3>📊 ফোনের রিপোর্ট</h3>
+<div class="stat"><span>ব্যাটারি</span><b id="battery">--</b></div>
+<div class="stat"><span>ব্যাটারির তাপমাত্রা</span><b id="temperature">--</b></div>
+<div class="stat"><span>চার্জ হচ্ছে</span><b id="charging">--</b></div>
+<div class="stat"><span>মোট স্টোরেজ</span><b id="totalStorage">--</b></div>
+<div class="stat"><span>খালি স্টোরেজ</span><b id="freeStorage">--</b></div>
+<div class="stat"><span>ইন্টারনেট</span><b id="internet">--</b></div>
+<div class="stat"><span>Phone Doctor নোটিফিকেশন</span><b id="notifications">--</b></div>
 </div>
 
 <div class="card">
-    <h3>📱 সমর্থিত অ্যাপ</h3>
-    <div id="apps">
-        অ্যাপের তথ্য সংগ্রহ হচ্ছে...
-    </div>
+<h3>📱 অ্যাপ ডায়াগনস্টিক</h3>
+<div class="grid">
+<div class="item"><b>WhatsApp</b><small>পারমিশন ও অ্যাপ সেটিংস</small><button onclick="appSettings('com.whatsapp')">পরীক্ষা / সেটিংস</button></div>
+<div class="item"><b>IMO</b><small>পারমিশন ও অ্যাপ সেটিংস</small><button onclick="appSettings('com.imo.android.imoim')">পরীক্ষা / সেটিংস</button></div>
+<div class="item"><b>Facebook</b><small>অ্যাপ সেটিংস</small><button onclick="appSettings('com.facebook.katana')">পরীক্ষা / সেটিংস</button></div>
+<div class="item"><b>Messenger</b><small>অ্যাপ সেটিংস</small><button onclick="appSettings('com.facebook.orca')">পরীক্ষা / সেটিংস</button></div>
+<div class="item"><b>Chrome</b><small>অ্যাপ সেটিংস</small><button onclick="appSettings('com.android.chrome')">পরীক্ষা / সেটিংস</button></div>
+<div class="item"><b>YouTube</b><small>অ্যাপ সেটিংস</small><button onclick="appSettings('com.google.android.youtube')">পরীক্ষা / সেটিংস</button></div>
+</div>
 </div>
 
 <div class="card">
-    <h3>🚨 শনাক্ত করা সমস্যা</h3>
-
-    <div id="diagnosticBox">
-        <p style="font-size:13px;color:#777">
-            এখনো কোনো নোটিফিকেশনের সমস্যা পাওয়া যায়নি।
-        </p>
-    </div>
+<h3>⚙️ ফোনের সেটিংস পরীক্ষা</h3>
+<div class="grid">
+<div class="item"><b>🔋 ব্যাটারি</b><button onclick="openSetting('battery')">সেটিংস খুলুন</button></div>
+<div class="item"><b>🌐 Wi-Fi</b><button onclick="openSetting('network')">সেটিংস খুলুন</button></div>
+<div class="item"><b>🔔 নোটিফিকেশন</b><button onclick="openSetting('notifications')">সেটিংস খুলুন</button></div>
+<div class="item"><b>💾 স্টোরেজ</b><button onclick="openSetting('storage')">সেটিংস খুলুন</button></div>
+<div class="item"><b>🔐 অ্যাপ পারমিশন</b><button onclick="openGeneralSettings()">সেটিংস খুলুন</button></div>
+<div class="item"><b>📶 নেটওয়ার্ক</b><button onclick="openSetting('network')">সেটিংস খুলুন</button></div>
+</div>
+<p>ফোনের Android সংস্করণ ও নির্মাতার অনুমতি অনুযায়ী কিছু সেটিংস সরাসরি পরীক্ষা করা যাবে; অন্যগুলো সেটিংসে খুলবে।</p>
 </div>
 
 <div class="card">
-    <h3>ℹ️ কী কী পরীক্ষা করতে পারে?</h3>
-    <p style="font-size:13px">
-        • ইন্টারনেট সংযোগ না থাকা<br>
-        • ফোনের স্টোরেজ প্রায় পূর্ণ হওয়া<br>
-        • ব্যাটারির তাপমাত্রা বেশি হওয়া<br>
-        • নির্দিষ্ট অ্যাপ খোলার ঘটনা শনাক্ত করা
-    </p>
-    <p style="font-size:12px;color:#777">
-        অন্য অ্যাপের ব্যক্তিগত মেসেজ বা অভ্যন্তরীণ ত্রুটি
-        এই অ্যাপ পড়তে পারে না।
-    </p>
+<h3>🚨 শনাক্ত করা সমস্যা ও সমাধান</h3>
+<div id="diagnosticBox">
+<p>এখনো কোনো সমস্যা পাওয়া যায়নি। ফোন পরীক্ষা করুন।</p>
+</div>
+</div>
+
+<div class="card">
+<h3>🔬 অতিরিক্ত ডায়াগনস্টিক</h3>
+<p>কল ব্লক লিস্ট, SIM, সেন্সর, ক্যামেরা, মাইক্রোফোন, স্পিকার, RAM, Bluetooth, GPS, VPN, Private DNS, Accessibility ও অন্যান্য সেটিংসের পরীক্ষা পরবর্তী Android সংযোগ যুক্ত হলে চালু হবে।</p>
+<p>ব্যক্তিগত তথ্য বা অন্য অ্যাপের গোপন তথ্য অনুমতি ছাড়া পড়া হবে না।</p>
 </div>
 
 </main>
 
 <footer>
-    Developer: Sabbir Ahmed<br>
-    SABBIR AI PHONE DOCTOR
+Developer: Sabbir Ahmed<br>
+SABBIR AI PHONE DOCTOR
 </footer>
 
 <script>
-
 function formatBytes(bytes){
-
-    if(!bytes || bytes < 0) return "--";
-
-    const gb = bytes / (1024 * 1024 * 1024);
-
-    return gb.toFixed(2) + " GB";
+ if(!bytes||bytes<0)return "--";
+ return (bytes/1073741824).toFixed(2)+" GB";
 }
 
-function updateMonitoringStatus(){
-
-    if(!window.PhoneDoctor) return;
-
-    const allowed = PhoneDoctor.hasUsageAccess();
-    const running = PhoneDoctor.isMonitoring();
-
-    document.getElementById("monitorStatus").innerHTML =
-        running
-        ? '<span class="green">● ব্যাকগ্রাউন্ড মনিটরিং চালু আছে</span>'
-        : '<span class="red">● মনিটরিং বন্ধ আছে</span>';
-
-    document.getElementById("permissionStatus").innerHTML =
-        allowed
-        ? '<span class="green">Usage Access অনুমতি দেওয়া হয়েছে</span>'
-        : '<span class="red">Usage Access অনুমতি প্রয়োজন</span>';
-}
-
-function openUsageAccess(){
-
-    if(!window.PhoneDoctor) return;
-
-    PhoneDoctor.openUsageAccessSettings();
-}
-
-function enableMonitoring(){
-
-    if(!window.PhoneDoctor){
-
-        alert("অ্যাপের Android সংযোগ পাওয়া যায়নি।");
-        return;
-    }
-
-    if(!PhoneDoctor.hasUsageAccess()){
-
-        alert("প্রথমে Usage Access অনুমতি দিন।");
-        PhoneDoctor.openUsageAccessSettings();
-        return;
-    }
-
-    if(!PhoneDoctor.notificationsAllowed()){
-
-        PhoneDoctor.requestNotificationPermission();
-
-        alert("নোটিফিকেশন অনুমতি দিন। তারপর আবার মনিটরিং চালু করুন।");
-        return;
-    }
-
-    const started = PhoneDoctor.startMonitoring();
-
-    if(started){
-
-        alert("মনিটরিং চালু করার অনুরোধ পাঠানো হয়েছে।");
-
-    }else{
-
-        alert("মনিটরিং চালু হয়নি। অনুমতি ও নোটিফিকেশন সেটিংস পরীক্ষা করুন।");
-    }
-
-    updateMonitoringStatus();
-}
-
-function stopMonitoring(){
-
-    if(!window.PhoneDoctor) return;
-
-    PhoneDoctor.stopMonitoring();
-
-    updateMonitoringStatus();
+function updateStatus(){
+ if(!window.PhoneDoctor)return;
+ let allowed=PhoneDoctor.hasUsageAccess();
+ let running=PhoneDoctor.isMonitoring();
+ document.getElementById("monitorStatus").innerHTML=
+ running?'<span class="good">● মনিটরিং চালু</span>':
+ '<span class="bad">● মনিটরিং বন্ধ</span>';
+ document.getElementById("permissionStatus").innerHTML=
+ allowed?'<span class="good">Usage Access অনুমতি দেওয়া আছে</span>':
+ '<span class="bad">Usage Access অনুমতি প্রয়োজন</span>';
 }
 
 function scanPhone(){
-
-    if(!window.PhoneDoctor){
-
-        alert("Android সংযোগ পাওয়া যায়নি।");
-        return;
-    }
-
-    try{
-
-        const report = JSON.parse(PhoneDoctor.getReport());
-
-        if(!report.success){
-
-            alert("ফোনের তথ্য সংগ্রহ করা যায়নি।");
-            return;
-        }
-
-        document.getElementById("battery").innerText =
-            report.battery >= 0
-            ? report.battery + "%"
-            : "--";
-
-        document.getElementById("charging").innerText =
-            report.charging ? "হ্যাঁ" : "না";
-
-        document.getElementById("temperature").innerText =
-            report.batteryTemperature >= 0
-            ? report.batteryTemperature + " °C"
-            : "--";
-
-        document.getElementById("totalStorage").innerText =
-            formatBytes(report.storageTotal);
-
-        document.getElementById("freeStorage").innerText =
-            formatBytes(report.storageFree);
-
-        document.getElementById("internet").innerHTML =
-            report.internetAvailable
-            ? '<span class="green">সংযুক্ত</span>'
-            : '<span class="red">সমস্যা আছে</span>';
-
-        let appHTML = "";
-
-        (report.apps || []).forEach(app => {
-
-            appHTML += `
-                <div class="app">
-                    <span>${app.name}</span>
-                    <strong class="${app.installed ? 'green':'red'}">
-                        ${app.installed ? 'ইনস্টল আছে':'ইনস্টল নেই'}
-                    </strong>
-                </div>
-            `;
-        });
-
-        document.getElementById("apps").innerHTML = appHTML;
-
-        updateMonitoringStatus();
-
-    }catch(error){
-
-        alert("তথ্য সংগ্রহে সমস্যা হয়েছে।");
-    }
+ if(!window.PhoneDoctor){
+  alert("Android সংযোগ পাওয়া যায়নি");
+  return;
+ }
+ try{
+  let r=JSON.parse(PhoneDoctor.getReport());
+  if(!r.success){alert("ফোনের রিপোর্ট পাওয়া যায়নি");return;}
+  document.getElementById("battery").innerText=
+   r.battery>=0?r.battery+"%":"--";
+  document.getElementById("temperature").innerText=
+   r.batteryTemperature>=0?r.batteryTemperature+" °C":"--";
+  document.getElementById("charging").innerText=
+   r.charging?"হ্যাঁ":"না";
+  document.getElementById("totalStorage").innerText=
+   formatBytes(r.storageTotal);
+  document.getElementById("freeStorage").innerText=
+   formatBytes(r.storageFree);
+  document.getElementById("internet").innerText=
+   r.internetAvailable?"সংযুক্ত":"সংযোগ নেই";
+  document.getElementById("notifications").innerText=
+   r.notificationsEnabled?"চালু":"বন্ধ";
+  updateStatus();
+ }catch(e){alert("রিপোর্ট পড়তে সমস্যা হয়েছে");}
 }
 
-function showDiagnostic(){
+function openUsageAccess(){
+ if(window.PhoneDoctor)PhoneDoctor.openUsageAccessSettings();
+}
 
-    if(!window.PhoneDoctor) return;
+function enableMonitoring(){
+ if(!window.PhoneDoctor)return;
+ if(!PhoneDoctor.hasUsageAccess()){
+  alert("প্রথমে Usage Access অনুমতি দিন");
+  openUsageAccess();return;
+ }
+ if(!PhoneDoctor.notificationsAllowed()){
+  PhoneDoctor.requestNotificationPermission();
+  alert("নোটিফিকেশন অনুমতি দিন, তারপর আবার চেষ্টা করুন");
+  return;
+ }
+ let ok=PhoneDoctor.startMonitoring();
+ alert(ok?"মনিটরিং চালুর অনুরোধ পাঠানো হয়েছে":"মনিটরিং চালু হয়নি। অনুমতি পরীক্ষা করুন");
+ updateStatus();
+}
 
-    try{
+function stopMonitoring(){
+ if(window.PhoneDoctor)PhoneDoctor.stopMonitoring();
+ updateStatus();
+}
 
-        const raw = PhoneDoctor.getPendingDiagnostic();
+function appSettings(pkg){
+ if(window.PhoneDoctor)PhoneDoctor.openAppSettings(pkg);
+}
 
-        if(!raw) return;
+function openSetting(type){
+ if(window.PhoneDoctor)PhoneDoctor.openSettings(type);
+}
 
-        const data = JSON.parse(raw);
-
-        const box = document.getElementById("diagnosticBox");
-
-        box.innerHTML = `
-            <div class="problem">
-                <h3>${escapeHTML(data.title || "সমস্যা শনাক্ত হয়েছে")}</h3>
-
-                <p>${escapeHTML(data.message || "")}</p>
-
-                <strong>সমাধানের উপায়:</strong>
-
-                <p style="white-space:pre-line">
-                    ${escapeHTML(data.steps || "")}
-                </p>
-            </div>
-        `;
-
-        box.scrollIntoView({behavior:"smooth"});
-
-    }catch(error){
-
-        console.log("Diagnostic display error");
-    }
+function openGeneralSettings(){
+ if(window.PhoneDoctor)PhoneDoctor.openSettings("general");
 }
 
 function escapeHTML(value){
-
-    return String(value || "").replace(/[&<>"']/g, function(char){
-
-        return {
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            '"':"&quot;",
-            "'":"&#039;"
-        }[char];
-    });
+ return String(value||"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+ }[c]));
 }
 
-window.addEventListener("load", function(){
+function showDiagnostic(){
+ if(!window.PhoneDoctor)return;
+ try{
+  let raw=PhoneDoctor.getPendingDiagnostic();
+  if(!raw)return;
+  let d=JSON.parse(raw);
+  document.getElementById("diagnosticBox").innerHTML=
+   '<div class="problem"><h3>'+
+   escapeHTML(d.title)+'</h3><p>'+
+   escapeHTML(d.message)+'</p><b>সমাধান:</b><p style="white-space:pre-line">'+
+   escapeHTML(d.steps)+'</p></div>';
+ }catch(e){}
+}
 
-    scanPhone();
-
-    showDiagnostic();
-
-    setInterval(function(){
-
-        updateMonitoringStatus();
-
-    }, 2000);
-
-    setInterval(function(){
-
-        scanPhone();
-
-    }, 15000);
-
+window.addEventListener("load",()=>{
+ scanPhone();
+ showDiagnostic();
+ updateStatus();
 });
-
 </script>
-
 </body>
 </html>
