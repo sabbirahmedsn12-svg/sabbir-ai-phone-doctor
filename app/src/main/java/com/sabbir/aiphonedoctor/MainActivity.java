@@ -195,6 +195,74 @@ public class MainActivity extends Activity {
                 }
             });
         }
+
+        @JavascriptInterface
+        public void openAppSettings(final String packageName) {
+
+            runOnUiThread(() -> {
+
+                String safePackage = null;
+
+                if ("com.whatsapp".equals(packageName)) {
+                    safePackage = "com.whatsapp";
+
+                } else if ("com.imo.android.imoim".equals(packageName)) {
+                    safePackage = "com.imo.android.imoim";
+
+                } else if ("com.facebook.katana".equals(packageName)) {
+                    safePackage = "com.facebook.katana";
+
+                } else if ("com.google.android.youtube".equals(packageName)) {
+                    safePackage = "com.google.android.youtube";
+                }
+
+                if (safePackage == null) {
+                    return;
+                }
+
+                try {
+
+                    Intent intent;
+
+                    if (Build.VERSION.SDK_INT >= 26) {
+
+                        intent = new Intent(
+                            Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                        );
+
+                        intent.putExtra(
+                            Settings.EXTRA_APP_PACKAGE,
+                            safePackage
+                        );
+
+                    } else {
+
+                        intent = new Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:" + safePackage)
+                        );
+                    }
+
+                    startActivity(intent);
+
+                } catch (Exception e) {
+
+                    try {
+                        Intent fallback = new Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:" + safePackage)
+                        );
+
+                        startActivity(fallback);
+
+                    } catch (Exception ignored) {
+                        startActivity(
+                            new Intent(Settings.ACTION_SETTINGS)
+                        );
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -206,4 +274,4 @@ public class MainActivity extends Activity {
             super.onBackPressed();
         }
     }
-}
+                    }
